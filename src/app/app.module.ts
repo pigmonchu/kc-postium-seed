@@ -8,8 +8,10 @@ import { NgModule } from '@angular/core';
 /*----------------------------------------------------------|
  | ~~~ Blue Path ~~~                                        |
  |----------------------------------------------------------|
- | Importa FromNowPipe para poder usarlo en este documento. |
+ | Importa  para poder usarlo en este documento. |
  |----------------------------------------------------------*/
+import { FromNowPipe } from "./pipes/from-now.pipe";
+
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -32,6 +34,8 @@ import { PostsResolveService } from './posts-resolve.service';
 import { PostsViewComponent } from './posts-view/posts-view.component';
 import { PostService } from './post.service';
 import { SearchBoxComponent } from './search-box/search-box.component';
+
+
 
 @NgModule({
   imports: [
@@ -61,7 +65,8 @@ import { SearchBoxComponent } from './search-box/search-box.component';
     PostsByCategoryComponent,
     PostsListComponent,
     PostsViewComponent,
-    SearchBoxComponent
+    SearchBoxComponent, 
+    FromNowPipe
   ],
   providers: [
     BackendUriProvider,
