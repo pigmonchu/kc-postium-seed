@@ -21,7 +21,6 @@ export class CategoryBoxComponent {
   @Output() categorySelected: EventEmitter<Category> = new EventEmitter<Category>();
 
   showCategoryPosts(category: Category): void {
-    console.log(category.id);
     this.categorySelected.emit(category);
   }
 

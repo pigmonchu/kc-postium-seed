@@ -48,7 +48,6 @@ export class PostDetailsComponent implements OnInit {
    | pasando como parámetro el identificador de la categoría.                                                           |
    |--------------------------------------------------------------------------------------------------------------------*/
    watchCategoryPost(category: Category): void {
-     console.log("categoryWatch: "+category.id);
      this._router.navigate([`posts/categories/${category.id}`])
    }
 }
