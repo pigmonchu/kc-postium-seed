@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Router} from "@angular/router";
 
 import { Post } from './../post';
 
@@ -9,6 +10,8 @@ import { Post } from './../post';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostsListComponent {
+
+  constructor(private _router: Router) { }
 
   @Input() posts: Post[];
 
@@ -28,4 +31,7 @@ export class PostsListComponent {
    | a navegar es '/posts', pasando como parámetro el identificador del post.                                        |
    |-----------------------------------------------------------------------------------------------------------------*/
 
+   watchDetailPost(post: Post): void {
+     this._router.navigate([`/posts/${post.id}`]);
+   }
 }

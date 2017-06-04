@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Post } from './../post';
 
@@ -18,6 +18,12 @@ export class PostPreviewComponent {
    | de eventos; la idea es enviar al componente padre el usuario sobre el cuál se ha hecho clic. Y puesto que dicho  |
    | clic se realiza en el template de este componente, necesitas, además, un manejador para el mismo.                |
    |------------------------------------------------------------------------------------------------------------------*/
+
+    @Output() postSelected: EventEmitter<Post> = new EventEmitter<Post>();
+
+    showDetail(data: Post): void {
+      this.postSelected.emit(data);
+    }
 
   /*------------------------------------------------------------------------------------------------------------------|
    | ~~~ Green Path ~~~                                                                                               |
