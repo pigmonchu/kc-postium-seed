@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Post } from './../post';
+import { User } from './../user';
 
 @Component({
   selector: 'post-preview',
@@ -20,9 +21,14 @@ export class PostPreviewComponent {
    |------------------------------------------------------------------------------------------------------------------*/
 
     @Output() postSelected: EventEmitter<Post> = new EventEmitter<Post>();
+    @Output() authorSelected: EventEmitter<User> = new EventEmitter<User>();
 
-    showDetail(data: Post): void {
-      this.postSelected.emit(data);
+    showDetail(post: Post): void {
+      this.postSelected.emit(post);
+    }
+
+    showAuthorPosts(author: User): void {
+      this.authorSelected.emit(author);
     }
 
   /*------------------------------------------------------------------------------------------------------------------|

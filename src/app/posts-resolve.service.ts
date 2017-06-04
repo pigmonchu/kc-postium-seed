@@ -7,10 +7,10 @@ import { PostService } from './post.service';
 
 @Injectable()
 export class PostsResolveService implements Resolve<Post[]> {
-
   constructor(private _postService: PostService) { }
 
   resolve(route: ActivatedRouteSnapshot): Observable<Post[]> {
+    const filterByUser: string = "userId";
 
     /*-----------------------------------------------------------------------------------------|
      | ~~~ Red Path ~~~                                                                        |
@@ -28,7 +28,10 @@ export class PostsResolveService implements Resolve<Post[]> {
      | Recuerda mirar en los parámetros de la ruta, a ver qué encuentras.                      |
      |-----------------------------------------------------------------------------------------*/
 
+    if (route.params[filterByUser] !== undefined) {
+      return this._postService.getUserPosts(+route.params[filterByUser]);
+    }
+
     return this._postService.getPosts();
   }
-
 }

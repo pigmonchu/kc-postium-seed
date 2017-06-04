@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Router} from "@angular/router";
 
 import { Post } from './../post';
+import { User } from './../user';
 
 @Component({
   selector: 'posts-list',
@@ -22,7 +23,10 @@ export class PostsListComponent {
    | dirección correspondiente. Recuerda que para hacer esto necesitas inyectar como dependencia el Router de la app. |
    | La ruta a navegar es '/posts/users', pasando como parámetro el identificador del autor.                          |
    |------------------------------------------------------------------------------------------------------------------*/
-
+  watchUserPosts(user: User): void {
+    this._router.navigate([`/posts/users/${user.id}`]);
+  }
+  
   /*-----------------------------------------------------------------------------------------------------------------|
    | ~~~ Green Path ~~~                                                                                              |
    |-----------------------------------------------------------------------------------------------------------------|
