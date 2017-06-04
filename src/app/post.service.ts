@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import "rxjs/add/operator/map";
+import "rxjs/add/operator/filter";
 
 import { BackendUri } from './settings';
 import { Post } from './post';
@@ -11,6 +12,7 @@ export class PostService {
 
   constructor(
     private _http: Http,
+
     @Inject(BackendUri) private _backendUri) { }
 
   getPosts(): Observable<Post[]> {
@@ -30,7 +32,7 @@ export class PostService {
      |   - Ordenación: _sort=publicationDate&_order=DESC                                            |
      |----------------------------------------------------------------------------------------------*/
 
-    var hoy = Date.now()
+    var hoy = Date.now();
 
     return this._http
       .get(`${this._backendUri}/posts?_sort=publicationDate&_order=desc&publicationDate_lte=${hoy}`)
@@ -56,12 +58,15 @@ export class PostService {
      |   - Ordenación: _sort=publicationDate&_order=DESC                                            |
      |----------------------------------------------------------------------------------------------*/
 
+    var hoy = Date.now();
+
     return this._http
-      .get(`${this._backendUri}/posts`)
+      .get(`${this._backendUri}/posts?_sort=publicationDate&_order=desc&publicationDate_lte=${hoy}&author.id=${id}`)
       .map((response: Response): Post[] => Post.fromJsonToList(response.json()));
   }
 
   getCategoryPosts(id: number): Observable<Post[]> {
+    console.log("entra por getCategoryPosts");
 
     /*--------------------------------------------------------------------------------------------------|
      | ~~~ Yellow Path ~~~                                                                              |
@@ -83,10 +88,15 @@ export class PostService {
      |   - Filtro por fecha de publicación: publicationDate_lte=x (siendo x la fecha actual)            |
      |   - Ordenación: _sort=publicationDate&_order=DESC                                                |
      |--------------------------------------------------------------------------------------------------*/
+    var hoy = Date.now();
 
     return this._http
-      .get(`${this._backendUri}/posts`)
-      .map((response: Response): Post[] => Post.fromJsonToList(response.json()));
+      .get(`${this._backendUri}/posts?_sort=publicationDate&_order=desc&publicationDate_lte=${hoy}`)
+      .map((response: Response): Post[] => Post.fromJsonToList(response.json())
+        .filter(
+          post => post.categories.filter(category => category.id === id).length > 0
+        )
+      )
   }
 
   getPostDetails(id: number): Observable<Post> {
