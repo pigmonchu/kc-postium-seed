@@ -11,6 +11,7 @@ export class PostsResolveService implements Resolve<Post[]> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<Post[]> {
     const filterByUser: string = "userId";
+    const filterByCategory: string = "categoryId";
 
     /*-----------------------------------------------------------------------------------------|
      | ~~~ Red Path ~~~                                                                        |
@@ -27,11 +28,17 @@ export class PostsResolveService implements Resolve<Post[]> {
      | a una categoría, llame a la función 'getCategoryPosts()' del servicio PostService.      |
      | Recuerda mirar en los parámetros de la ruta, a ver qué encuentras.                      |
      |-----------------------------------------------------------------------------------------*/
-
     if (route.params[filterByUser] !== undefined) {
+      console.log("Por autor");
       return this._postService.getUserPosts(+route.params[filterByUser]);
     }
 
+    if (route.params[filterByCategory] !== undefined) {
+      console.log("Por categoria");
+      return this._postService.getCategoryPosts(+route.params[filterByCategory]);
+    }
+
+    console.log("todas");
     return this._postService.getPosts();
   }
 }
