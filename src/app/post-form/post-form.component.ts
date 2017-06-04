@@ -63,6 +63,7 @@ export class PostFormComponent implements OnInit {
      |-------------------------------------------------------------------------------------------------------------*/
 
     let post: Post = Post.fromJson(form.value);
+console.log(post);
     post.likes = [];
     post.categories = [];
     post.author = User.defaultUser();

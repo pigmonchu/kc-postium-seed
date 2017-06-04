@@ -29,16 +29,13 @@ export class PostsResolveService implements Resolve<Post[]> {
      | Recuerda mirar en los parámetros de la ruta, a ver qué encuentras.                      |
      |-----------------------------------------------------------------------------------------*/
     if (route.params[filterByUser] !== undefined) {
-      console.log("Por autor");
       return this._postService.getUserPosts(+route.params[filterByUser]);
     }
 
     if (route.params[filterByCategory] !== undefined) {
-      console.log("Por categoria");
       return this._postService.getCategoryPosts(+route.params[filterByCategory]);
     }
 
-    console.log("todas");
     return this._postService.getPosts();
   }
 }

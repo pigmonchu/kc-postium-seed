@@ -88,3 +88,8 @@ input[type="datetime-local"] {
   opacity: 0;
   pointer-events: none;
 }
+
+.msgError {
+  color: #02B875;
+  font-size: smaller;
+}
